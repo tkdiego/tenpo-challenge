@@ -32,7 +32,7 @@ public class TrackingHistoryControllerTest extends AbstractControllerTest {
 
     private static final String RANDOM_USERNAME_1 = "MRandom1";
     private static final String RANDOM_USERNAME_2 = "MRandom2";
-    private static final String RANDOM_USERNAME_3 = "MRandom3";
+
     private static final String RANDOM_PASS_1 = "Mpass1";
     private static final String RANDOM_PASS_2 = "Mpass2";
     @Autowired
