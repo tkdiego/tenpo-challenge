@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+#  app:
+  #    container_name: tenpo-app
+  #    image: tenpo-app
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - "8080:8080"
+  #    depends_on:
+  #      - dbpostgresql
+
+  dbpostgresql:
+    restart: always
+    image: 'postgres:latest'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=passWord
+      - POSTGRES_USER=postGres
+      - POSTGRES_DB=tenpo-challenge
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
