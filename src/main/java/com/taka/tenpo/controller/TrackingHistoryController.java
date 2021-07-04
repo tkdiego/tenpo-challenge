@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.taka.tenpo.controller.URLConstants.API;
 import static com.taka.tenpo.controller.URLConstants.HISTORY_DEFAULT_PAGE;
 import static com.taka.tenpo.controller.URLConstants.HISTORY_DEFAULT_PAGE_LIMIT;
+import static com.taka.tenpo.controller.URLConstants.REQUEST_TYPE;
 import static com.taka.tenpo.controller.URLConstants.TRACKING_HISTORY;
 
 @RestController
@@ -29,10 +30,10 @@ public class TrackingHistoryController {
     @GetMapping(TRACKING_HISTORY)
     @ResponseBody
     @TrackingRequest(requestType = RequestType.TRACKING_HISTORY)
-    public PaginationResponse<TrackingRecorder> getHistory(@RequestParam(required = false) RequestType request_type,
+    public PaginationResponse<TrackingRecorder> getHistory(@RequestParam(required = false, name = REQUEST_TYPE) RequestType requestType,
                                                            @RequestParam(required = false, defaultValue = HISTORY_DEFAULT_PAGE) int page,
                                                            @RequestParam(required = false, defaultValue = HISTORY_DEFAULT_PAGE_LIMIT) int limit) {
 
-        return recorderService.getAllRecordTracking(new HistoryRequest(request_type, page, limit));
+        return recorderService.getAllRecordTracking(new HistoryRequest(requestType, page, limit));
     }
 }

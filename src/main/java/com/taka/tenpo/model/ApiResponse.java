@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApiResponse {
-    private int code;
+    private int status;
     private String message;
 }

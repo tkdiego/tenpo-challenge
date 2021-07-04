@@ -34,8 +34,12 @@ public class AuthenticationResolver {
     }
 
     public static Optional<UserCredential> getUserDetails() {
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserCredential) {
-            return of((UserCredential) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        try {
+            if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserCredential) {
+                return of((UserCredential) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            }
+        } catch (Exception e) {
+            LOGGER.error("Security context error.");
         }
         LOGGER.warn("User details could not be obtained. By default it will be anonymous.");
         return empty();

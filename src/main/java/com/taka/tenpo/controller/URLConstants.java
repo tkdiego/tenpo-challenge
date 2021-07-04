@@ -15,6 +15,7 @@ public class URLConstants {
     public static final String SECOND_VALUE = "second_value";
 
     public static final String TRACKING_HISTORY = "/tracking_history";
+    public static final String REQUEST_TYPE = "request_type";
     public static final String HISTORY_DEFAULT_PAGE = "0";
     public static final String HISTORY_DEFAULT_PAGE_LIMIT = "10";
 

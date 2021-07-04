@@ -1,6 +1,6 @@
 package com.taka.tenpo.domain.security.service;
 
-import com.taka.tenpo.domain.security.exception.InvalidUsernameException;
+import com.taka.tenpo.domain.security.exception.UsernameNotAvailableException;
 import com.taka.tenpo.domain.security.model.LoginRequest;
 import com.taka.tenpo.domain.security.model.LogoutRequest;
 import com.taka.tenpo.domain.security.model.SessionData;
@@ -48,7 +48,7 @@ public class SessionService {
             sessionRepository.save(new SessionData(getUserId(), loginRequest.getUsername(), tokenResponse.getValue()));
             LOGGER.info("The {}'s session was created. Login was successful.", loginRequest.getUsername());
         } else {
-            LOGGER.info("Username {} is already logged in. Returns the same token.", loginRequest.getUsername());
+            LOGGER.info("Username {} is already logged in. Returns the new token.", loginRequest.getUsername());
             SessionData currentSessionData = sessionRepository.getByUsername(loginRequest.getUsername());
             currentSessionData.setToken(tokenResponse.getValue());
             sessionRepository.save(currentSessionData);
@@ -74,7 +74,7 @@ public class SessionService {
         } else {
             String msg = format("Username %s already exists.", signInRequest.getUsername());
             LOGGER.info(msg);
-            throw new InvalidUsernameException(msg);
+            throw new UsernameNotAvailableException(msg);
         }
     }
 
