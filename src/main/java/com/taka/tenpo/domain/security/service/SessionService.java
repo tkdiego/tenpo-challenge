@@ -9,23 +9,20 @@ import com.taka.tenpo.domain.security.model.TokenResponse;
 import com.taka.tenpo.domain.security.model.UserData;
 import com.taka.tenpo.domain.security.repository.SessionRepository;
 import com.taka.tenpo.domain.security.repository.UserRepository;
-import com.taka.tenpo.domain.security.util.AuthenticationResolver;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.generateCredential;
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.getUserDetails;
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.getUserId;
+import static com.taka.tenpo.domain.security.service.AuthenticationService.generateCredential;
+import static com.taka.tenpo.domain.security.service.AuthenticationService.getUserDetails;
+import static com.taka.tenpo.domain.security.service.AuthenticationService.getUserId;
 import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 @AllArgsConstructor
-@Setter
 public class SessionService {
 
     private static final Logger LOGGER = getLogger(SessionService.class);
@@ -38,7 +35,7 @@ public class SessionService {
 
     private final JwtService jwtService;
 
-    private final AuthenticationResolver authenticationResolver;
+    private final AuthenticationService authenticationResolver;
 
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {

@@ -1,9 +1,11 @@
 package com.taka.tenpo.controller;
 
 import com.taka.tenpo.domain.math.enums.OperationType;
+import com.taka.tenpo.domain.math.model.MathResponse;
 import com.taka.tenpo.domain.math.service.MathService;
 import com.taka.tenpo.domain.recorder.aspect.TrackingRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +29,8 @@ public class MathController {
 
     @GetMapping(SUM)
     @TrackingRequest(requestType = MATH_SUM)
-    public BigDecimal calculate(@RequestParam(FIRST_VALUE) BigDecimal firstValue,
-                                @RequestParam(SECOND_VALUE) BigDecimal secondValue) {
-        return mathService.executeMathOperation(OperationType.SUM, firstValue, secondValue);
+    public ResponseEntity<MathResponse> calculate(@RequestParam(FIRST_VALUE) BigDecimal firstValue,
+                                                  @RequestParam(SECOND_VALUE) BigDecimal secondValue) {
+        return ResponseEntity.ok(mathService.executeMathOperation(OperationType.SUM, firstValue, secondValue));
     }
 }

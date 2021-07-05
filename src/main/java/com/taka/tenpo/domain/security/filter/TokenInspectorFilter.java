@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.taka.tenpo.domain.security.service.AuthenticationService.generateCredential;
 import static com.taka.tenpo.domain.security.service.JwtService.getTokenFromHeader;
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.generateCredential;
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 

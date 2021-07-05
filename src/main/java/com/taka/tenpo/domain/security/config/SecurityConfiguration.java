@@ -1,11 +1,11 @@
 package com.taka.tenpo.domain.security.config;
 
 
+import com.taka.tenpo.domain.security.config.entrypoint.CustomAuthenticationEntryPoint;
 import com.taka.tenpo.domain.security.filter.TokenInspectorFilter;
 import com.taka.tenpo.domain.security.service.JwtService;
 import com.taka.tenpo.domain.security.service.SessionService;
 import com.taka.tenpo.domain.security.service.UserCredentialService;
-import com.taka.tenpo.domain.security.util.AuthenticationResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 import static com.taka.tenpo.controller.URLConstants.API_DOCS;
 import static com.taka.tenpo.controller.URLConstants.AUTH;
@@ -33,8 +32,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final BasicAuthenticationEntryPoint basicAuthenticationEntryPoint;
-
     private final AccessDeniedHandlerImpl accessDeniedHandler;
 
     private final JwtService jwtService;
@@ -43,10 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserCredentialService userCredentialService;
 
+
     @Lazy
-    public SecurityConfiguration(BasicAuthenticationEntryPoint basicAuthenticationEntryPoint, AccessDeniedHandlerImpl accessDeniedHandler, JwtService jwtService,
+    public SecurityConfiguration(AccessDeniedHandlerImpl accessDeniedHandler, JwtService jwtService,
                                  SessionService sessionService, UserCredentialService userCredentialService) {
-        this.basicAuthenticationEntryPoint = basicAuthenticationEntryPoint;
         this.accessDeniedHandler = accessDeniedHandler;
         this.jwtService = jwtService;
         this.sessionService = sessionService;
@@ -57,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(STATELESS).and()
-                .exceptionHandling().authenticationEntryPoint(basicAuthenticationEntryPoint)
+                .exceptionHandling().authenticationEntryPoint(createCustomAuthenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler)
                 .and().authorizeRequests()
                 .antMatchers(AUTH + SIGN_IN).permitAll()
@@ -87,10 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BasicAuthenticationEntryPoint createBasicAuthenticationEntryPoint() {
-        BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
-        basicAuthenticationEntryPoint.setRealmName("tenpo-challenge");
-        return basicAuthenticationEntryPoint;
+    public CustomAuthenticationEntryPoint createCustomAuthenticationEntryPoint() {
+        CustomAuthenticationEntryPoint customAuthenticationEntryPoint = new CustomAuthenticationEntryPoint();
+        return customAuthenticationEntryPoint;
     }
 
     @Bean
@@ -102,11 +98,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder createPasswordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
-    }
-
-    @Bean
-    public AuthenticationResolver createAuthenticationResolver() throws Exception {
-        return new AuthenticationResolver(authenticationManagerBean());
     }
 
     @Override

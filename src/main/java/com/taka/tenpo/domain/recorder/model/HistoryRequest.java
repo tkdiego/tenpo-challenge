@@ -10,7 +10,9 @@ import lombok.Setter;
 public class HistoryRequest {
 
     private RequestType requestType;
+
     private int page;
+
     private int pageSize;
 
 }

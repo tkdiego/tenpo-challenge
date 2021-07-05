@@ -23,10 +23,13 @@ public class SessionData {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private Long userId;
+
     @Column(nullable = false, unique = true)
     private String username;
+
     @JsonProperty(access = WRITE_ONLY)
     @JsonIgnore
     private String token;

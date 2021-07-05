@@ -14,7 +14,10 @@ import java.util.List;
 public class PaginationResponse<T> {
 
     private List<T> items;
+
     private int pages;
+
     private int currentPage;
+
     private int totalItems;
 }

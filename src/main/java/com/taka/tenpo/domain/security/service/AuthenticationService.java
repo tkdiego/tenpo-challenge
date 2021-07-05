@@ -1,4 +1,4 @@
-package com.taka.tenpo.domain.security.util;
+package com.taka.tenpo.domain.security.service;
 
 import com.taka.tenpo.domain.security.model.UserCredential;
 import com.taka.tenpo.domain.security.model.UserData;
@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -18,10 +19,11 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.slf4j.LoggerFactory.getLogger;
 
+@Service
 @AllArgsConstructor
-public class AuthenticationResolver {
+public class AuthenticationService {
 
-    private static final Logger LOGGER = getLogger(AuthenticationResolver.class);
+    private static final Logger LOGGER = getLogger(AuthenticationService.class);
 
     private final AuthenticationManager authenticationManager;
 

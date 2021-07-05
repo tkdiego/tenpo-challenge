@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import static com.taka.tenpo.domain.recorder.model.RequestStatus.FAILURE;
 import static com.taka.tenpo.domain.recorder.model.RequestStatus.OK;
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.getUsername;
+import static com.taka.tenpo.domain.security.service.AuthenticationService.getUsername;
 
 @Aspect
 @Component

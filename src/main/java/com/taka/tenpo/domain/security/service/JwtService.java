@@ -3,7 +3,6 @@ package com.taka.tenpo.domain.security.service;
 
 import com.taka.tenpo.domain.security.model.TokenResponse;
 import com.taka.tenpo.domain.security.repository.SessionRepository;
-import com.taka.tenpo.domain.security.util.AuthenticationResolver;
 import com.taka.tenpo.domain.security.util.JwtGenerator;
 import com.taka.tenpo.domain.security.util.JwtTranslator;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,7 +49,7 @@ public class JwtService {
     }
 
     public TokenResponse generateTokenResponse() {
-        String token = jwtGenerator.generate(AuthenticationResolver.getUsername(), jwtSignKey);
+        String token = jwtGenerator.generate(AuthenticationService.getUsername(), jwtSignKey);
         return new TokenResponse(TOKEN_BEARER, token);
     }
 

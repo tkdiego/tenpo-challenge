@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.taka.tenpo.domain.security.util.AuthenticationResolver.generateInvalidCredential;
+import static com.taka.tenpo.domain.security.service.AuthenticationService.generateInvalidCredential;
 import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
