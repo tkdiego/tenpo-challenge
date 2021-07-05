@@ -9,22 +9,14 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.slf4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
-import static org.springframework.util.StringUtils.hasText;
 
-public class JwtResolver {
+public class JwtTranslator {
 
-    private static final Logger LOGGER = getLogger(JwtResolver.class);
-
-    private static final String TOKEN_HEADER = "Authorization";
-    private static final String TOKEN_BEARER = "Bearer ";
-    private static final int START_TOKEN_INDEX = 7;
+    private static final Logger LOGGER = getLogger(JwtTranslator.class);
 
     public static String getUsername(String token, String signKey) {
-
         return ofNullable(getClaims(token, signKey)).map(claim -> claim.getSubject())
                 .orElseThrow(() -> {
                     String msg = "User token is invalid.";
@@ -37,27 +29,10 @@ public class JwtResolver {
         return getClaims(token, signKey) != null;
     }
 
-    public static String getTokenFromHeader(HttpServletRequest request) {
-        String tokenHeader = request.getHeader(TOKEN_HEADER);
-        return removeBearerToToken(tokenHeader);
-    }
-
-    private static String removeBearerToToken(String token) {
-        if (containBearer(token)) {
-            return token.substring(START_TOKEN_INDEX);
-        }
-        return token;
-    }
-
-    private static boolean containBearer(String token) {
-        return hasText(token) && token.startsWith(TOKEN_BEARER);
-    }
-
     private static Claims getClaims(String token, String signKey) {
-        String jwt = removeBearerToToken(token);
-        if (jwt != null) {
+        if (token != null) {
             try {
-                return Jwts.parserBuilder().setSigningKey(signKey).build().parseClaimsJws(jwt).getBody();
+                return Jwts.parserBuilder().setSigningKey(signKey).build().parseClaimsJws(token).getBody();
             } catch (SignatureException se) {
                 LOGGER.error("Invalid Signature {}", se.getMessage());
             } catch (MalformedJwtException mje) {

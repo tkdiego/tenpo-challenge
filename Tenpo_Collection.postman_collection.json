@@ -75,12 +75,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YWthaGFzaGkiLCJpYXQiOjE2MjU0NDcxNjMsImV4cCI6MTYyNTQ1MDc2M30.Wo_h_5o6keSuWTnc3Ui7zX129yNNrmxRB2bYPZYbuN1fJ7xw3f5WT7tOfN-gB8ooj0J-yVIVK9G3ObF6plwSVA",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YWthaGFzaGkiLCJpYXQiOjE2MjU0ODYxODQsImV4cCI6MTYyNTQ4OTc4NH0.uQQDRaPFLmuFfcUKq8tLca25aedxEbszYAGOMi7x1LvP-LK5QX4QLHML6SsrEA8Rk3OvJQexgwiLikqqDQZRYA",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/api/math/sum",
+							"raw": "http://localhost:8080/api/math/sum?first_value=75.2&second_value=45.54",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -90,6 +90,16 @@
 								"api",
 								"math",
 								"sum"
+							],
+							"query": [
+								{
+									"key": "first_value",
+									"value": "75.2"
+								},
+								{
+									"key": "second_value",
+									"value": "45.54"
+								}
 							]
 						}
 					},
@@ -102,12 +112,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YWthMiIsImlhdCI6MTYyNTQxMTk3NCwiZXhwIjoxNjI1NDE1NTc0fQ.zAkwnWAhrZFWkKCqP6SDB6CeO10iy5s-DZANzIzqSAOUxMm6zhPnjkg9wzQrDIzgH6eM_x1_XLAUpGytMwmN9Q",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YWthaGFzaGkiLCJpYXQiOjE2MjU0ODYxODQsImV4cCI6MTYyNTQ4OTc4NH0.uQQDRaPFLmuFfcUKq8tLca25aedxEbszYAGOMi7x1LvP-LK5QX4QLHML6SsrEA8Rk3OvJQexgwiLikqqDQZRYA",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/api/tracking_history?page=1&limit=5",
+							"raw": "http://localhost:8080/api/tracking_history?page=0&limit=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -120,11 +130,16 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "0"
 								},
 								{
 									"key": "limit",
 									"value": "5"
+								},
+								{
+									"key": "request_type",
+									"value": "SIGN_IN",
+									"disabled": true
 								}
 							]
 						}
@@ -135,7 +150,13 @@
 					"name": "Logout",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0YWthaGFzaGkiLCJpYXQiOjE2MjU0ODYxODQsImV4cCI6MTYyNTQ4OTc4NH0.uQQDRaPFLmuFfcUKq8tLca25aedxEbszYAGOMi7x1LvP-LK5QX4QLHML6SsrEA8Rk3OvJQexgwiLikqqDQZRYA",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/auth/logout",
 							"host": [
