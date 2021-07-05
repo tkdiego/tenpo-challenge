@@ -16,18 +16,18 @@ public class JwtGenerator {
 
     private int jwtTtl;
 
+    private static Key generateKey(String jwtSignKey) {
+        return Keys.hmacShaKeyFor(BASE64.decode(jwtSignKey));
+    }
+
     public String generate(String username, String jwtSignKey) {
         Instant today = Instant.now();
-        Instant expirationDate = today.plus(this.jwtTtl, MINUTES);
+        Instant expirationDate = today.plus(jwtTtl, MINUTES);
         return Jwts.builder().setSubject(username)
                 .setIssuedAt(from(today))
                 .setExpiration(from(expirationDate))
                 .signWith(generateKey(jwtSignKey))
                 .compact();
-    }
-
-    private static Key generateKey(String jwtSignKey) {
-        return Keys.hmacShaKeyFor(BASE64.decode(jwtSignKey));
     }
 
 }

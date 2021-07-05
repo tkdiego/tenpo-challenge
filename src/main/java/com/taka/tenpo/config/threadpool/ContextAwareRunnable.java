@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static java.lang.String.format;
 
-public class ContextAwareRunnable implements  Runnable{
+public class ContextAwareRunnable implements Runnable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContextAwareRunnable.class);
 
@@ -21,21 +21,21 @@ public class ContextAwareRunnable implements  Runnable{
     public ContextAwareRunnable(Runnable task, RequestAttributes context) {
         this.task = task;
         this.context = context;
-        this.mdcContext = MDC.getCopyOfContextMap();
+        mdcContext = MDC.getCopyOfContextMap();
     }
 
     @Override
     public void run() {
-        if(this.context != null) {
-            RequestContextHolder.setRequestAttributes(this.context);
+        if (context != null) {
+            RequestContextHolder.setRequestAttributes(context);
         }
-        if(this.mdcContext != null) {
-            MDC.setContextMap(this.mdcContext);
+        if (mdcContext != null) {
+            MDC.setContextMap(mdcContext);
         } else {
             MDC.clear();
         }
         try {
-            this.task.run();
+            task.run();
         } catch (Exception e) {
             LOGGER.error(format("An error occurs when execute background task. Task: %s - Exception: %s", task, e));
         } finally {

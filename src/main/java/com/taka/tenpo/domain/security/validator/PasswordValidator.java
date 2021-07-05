@@ -12,7 +12,7 @@ public class PasswordValidator implements ConstraintValidator<UserPassword, Sign
 
     @Override
     public boolean isValid(SignInRequest signInRequest, ConstraintValidatorContext constraintValidatorContext) {
-        if(!hasText(signInRequest.getPassword()) || !hasText(signInRequest.getConfirmPassword())){
+        if (!hasText(signInRequest.getPassword()) || !hasText(signInRequest.getConfirmPassword())) {
             return false;
         }
         return signInRequest.getPassword().equals(signInRequest.getConfirmPassword());

@@ -14,14 +14,11 @@ import java.util.Collection;
 public class UserCredential implements UserDetails {
 
     private static final long serialVersionUID = 5348024282615796412L;
+    boolean credentialsNonExpired;
     private Long id;
-
     private String username;
-
     @JsonIgnore
     private String password;
-
-    boolean credentialsNonExpired;
 
     public UserCredential(Long id, String username, String password) {
         this.id = id;

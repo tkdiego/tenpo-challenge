@@ -20,6 +20,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 public class UserData {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @JsonProperty(access = WRITE_ONLY)
+    @JsonIgnore
+    private String password;
+
     public UserData() {
 
     }
@@ -28,16 +37,5 @@ public class UserData {
         this.username = username;
         this.password = password;
     }
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @JsonProperty(access = WRITE_ONLY)
-    @JsonIgnore
-    private String password;
 
 }

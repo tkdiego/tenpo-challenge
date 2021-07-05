@@ -40,6 +40,7 @@ public class TrackingHistoryControllerTest extends AbstractControllerTest {
 
     @Test
     public void getTotalElementsTest() throws Exception {
+        trackingRecorderRepository.deleteAll();
         signInProcess(RANDOM_USERNAME_1, RANDOM_PASS_1, RANDOM_PASS_1);
         TokenResponse token = getTokenResponse(loginProcess(RANDOM_USERNAME_1, RANDOM_PASS_1));
         mathProcess(ONE, ONE, token.getKey(), token.getValue());

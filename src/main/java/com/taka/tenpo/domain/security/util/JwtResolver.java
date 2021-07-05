@@ -43,19 +43,19 @@ public class JwtResolver {
     }
 
     private static String removeBearerToToken(String token) {
-        if(containBearer(token)) {
+        if (containBearer(token)) {
             return token.substring(START_TOKEN_INDEX);
         }
         return token;
     }
 
-    private static boolean containBearer(String token ) {
+    private static boolean containBearer(String token) {
         return hasText(token) && token.startsWith(TOKEN_BEARER);
     }
 
     private static Claims getClaims(String token, String signKey) {
         String jwt = removeBearerToToken(token);
-        if(jwt != null){
+        if (jwt != null) {
             try {
                 return Jwts.parserBuilder().setSigningKey(signKey).build().parseClaimsJws(jwt).getBody();
             } catch (SignatureException se) {

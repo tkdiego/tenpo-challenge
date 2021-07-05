@@ -39,18 +39,6 @@ import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    @Bean
-    public Docket api() {
-        return new Docket(SWAGGER_2)
-                .apiInfo(getApiInfo())
-                .securityContexts(singletonList(getSecurityContext()))
-                .securitySchemes(singletonList(getApiKey()))
-                .select()
-                .apis(basePackage(BASE_PACKAGE))
-                .paths(any())
-                .build();
-    }
-
     private static SecurityContext getSecurityContext() {
         return SecurityContext.builder().securityReferences(getAuthorization()).build();
     }
@@ -76,5 +64,17 @@ public class SwaggerConfiguration {
 
     private static ApiKey getApiKey() {
         return new ApiKey(API_NAME, API_KEY_NAME, API_PASS_AS);
+    }
+
+    @Bean
+    public Docket api() {
+        return new Docket(SWAGGER_2)
+                .apiInfo(getApiInfo())
+                .securityContexts(singletonList(getSecurityContext()))
+                .securitySchemes(singletonList(getApiKey()))
+                .select()
+                .apis(basePackage(BASE_PACKAGE))
+                .paths(any())
+                .build();
     }
 }

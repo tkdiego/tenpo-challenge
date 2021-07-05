@@ -63,15 +63,14 @@ public class AuthenticationResolver {
         setCredentialToContext(userCredential);
     }
 
-    public void authenticate(String username, String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password));
+    private static void setCredentialToContext(UserCredential userCredential) {
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userCredential, null, userCredential.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-
-    private static void setCredentialToContext(UserCredential userCredential) {
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userCredential, null, userCredential.getAuthorities());
+    public void authenticate(String username, String password) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

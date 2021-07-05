@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ TYPE })
+@Target({TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = UsernameValidator.class)
 @Documented
@@ -17,7 +17,7 @@ public @interface Username {
 
     String message() default "Username can only contain alphanumeric characters";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }
