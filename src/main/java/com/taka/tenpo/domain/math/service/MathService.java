@@ -10,10 +10,11 @@ import java.math.BigDecimal;
 
 @Service
 @AllArgsConstructor
-public class MathService {
+public class MathService implements IMathService {
 
     private final MathStrategyManager mathStrategyManager;
 
+    @Override
     public MathResponse executeMathOperation(OperationType operationType, BigDecimal firstValue, BigDecimal secondValue) {
         BigDecimal result = mathStrategyManager.execOperation(operationType, firstValue, secondValue);
         return new MathResponse(result);

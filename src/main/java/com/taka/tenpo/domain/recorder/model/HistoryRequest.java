@@ -1,5 +1,6 @@
 package com.taka.tenpo.domain.recorder.model;
 
+import com.taka.tenpo.domain.recorder.enums.RequestType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

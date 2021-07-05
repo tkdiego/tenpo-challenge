@@ -1,8 +1,8 @@
 package com.taka.tenpo.domain.security.filter;
 
 
+import com.taka.tenpo.domain.security.service.ISessionSecurityService;
 import com.taka.tenpo.domain.security.service.JwtService;
-import com.taka.tenpo.domain.security.service.SessionService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +28,7 @@ public class TokenInspectorFilter extends OncePerRequestFilter {
 
     private JwtService jwtService;
 
-    private SessionService sessionService;
+    private ISessionSecurityService sessionService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

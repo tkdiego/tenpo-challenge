@@ -23,7 +23,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 @AllArgsConstructor
-public class SessionService {
+public class SessionService implements ISessionService, ISessionSecurityService {
 
     private static final Logger LOGGER = getLogger(SessionService.class);
 
@@ -37,6 +37,7 @@ public class SessionService {
 
     private final AuthenticationService authenticationResolver;
 
+    @Override
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {
         authenticationResolver.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
@@ -51,6 +52,7 @@ public class SessionService {
         return tokenResponse;
     }
 
+    @Override
     @Transactional
     public void logout(LogoutRequest logoutRequest) {
         String username = jwtService.getUsername(logoutRequest.getToken());
@@ -59,6 +61,7 @@ public class SessionService {
         LOGGER.info("Username {} logged out successfully", username);
     }
 
+    @Override
     @Transactional
     public void signIn(SignInRequest signInRequest) {
         if (!userRepository.existsUserByUsername(signInRequest.getUsername())) {
@@ -71,10 +74,12 @@ public class SessionService {
         }
     }
 
+    @Override
     public boolean existSessionByToken(String token) {
         return sessionRepository.existsByToken(token);
     }
 
+    @Override
     public UserData getUserData(String username) {
         return userRepository.findByUsername(username);
     }

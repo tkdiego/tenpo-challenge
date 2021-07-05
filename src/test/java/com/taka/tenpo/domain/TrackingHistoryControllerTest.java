@@ -1,8 +1,8 @@
 package com.taka.tenpo.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.taka.tenpo.domain.recorder.enums.RequestType;
 import com.taka.tenpo.domain.recorder.model.PaginationResponse;
-import com.taka.tenpo.domain.recorder.model.RequestType;
 import com.taka.tenpo.domain.recorder.model.TrackingRecorder;
 import com.taka.tenpo.domain.recorder.repository.TrackingRecorderRepository;
 import com.taka.tenpo.domain.security.model.TokenResponse;
@@ -18,7 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
 import static com.taka.tenpo.controller.URLConstants.REQUEST_TYPE;
-import static com.taka.tenpo.domain.recorder.model.RequestType.LOGOUT;
+import static com.taka.tenpo.domain.recorder.enums.RequestType.LOGOUT;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ONE;
 import static java.math.RoundingMode.UP;

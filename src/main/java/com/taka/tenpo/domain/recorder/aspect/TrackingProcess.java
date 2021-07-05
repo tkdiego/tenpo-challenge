@@ -1,10 +1,9 @@
 package com.taka.tenpo.domain.recorder.aspect;
 
 
-import com.taka.tenpo.domain.recorder.model.RequestStatus;
+import com.taka.tenpo.domain.recorder.enums.RequestStatus;
 import com.taka.tenpo.domain.recorder.model.TrackingRecorder;
-import com.taka.tenpo.domain.recorder.service.RecorderService;
-import com.taka.tenpo.domain.security.service.JwtService;
+import com.taka.tenpo.domain.recorder.service.IRecorderService;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -12,8 +11,8 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-import static com.taka.tenpo.domain.recorder.model.RequestStatus.FAILURE;
-import static com.taka.tenpo.domain.recorder.model.RequestStatus.OK;
+import static com.taka.tenpo.domain.recorder.enums.RequestStatus.FAILURE;
+import static com.taka.tenpo.domain.recorder.enums.RequestStatus.OK;
 import static com.taka.tenpo.domain.security.service.AuthenticationService.getUsername;
 
 @Aspect
@@ -21,9 +20,7 @@ import static com.taka.tenpo.domain.security.service.AuthenticationService.getUs
 @AllArgsConstructor
 public class TrackingProcess {
 
-    private RecorderService recorderService;
-
-    private JwtService jwtService;
+    private IRecorderService recorderService;
 
     @AfterReturning(value = "@annotation(trackingRequest)")
     public void recordRequest(JoinPoint joinPoint, TrackingRequest trackingRequest) {

@@ -18,18 +18,20 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 @AllArgsConstructor
-public class RecorderService {
+public class RecorderService implements IRecorderService {
 
     private static final Logger LOGGER = getLogger(RecorderService.class);
 
     private final TrackingRecorderRepository trackingRecorderRepository;
 
+    @Override
     @Async
     public void recordTracking(TrackingRecorder trackingRecorder) {
         trackingRecorderRepository.save(trackingRecorder);
         LOGGER.info("Tracking Record was successfully. {}", trackingRecorder.toString());
     }
 
+    @Override
     public PaginationResponse<TrackingRecorder> getAllRecordTracking(HistoryRequest historyRequest) {
         Pageable pageable = PageRequest.of(historyRequest.getPage(), historyRequest.getPageSize());
         Page<TrackingRecorder> page;

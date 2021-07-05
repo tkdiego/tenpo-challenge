@@ -2,11 +2,11 @@ package com.taka.tenpo.controller;
 
 
 import com.taka.tenpo.domain.recorder.aspect.TrackingRequest;
+import com.taka.tenpo.domain.recorder.enums.RequestType;
 import com.taka.tenpo.domain.recorder.model.HistoryRequest;
 import com.taka.tenpo.domain.recorder.model.PaginationResponse;
-import com.taka.tenpo.domain.recorder.model.RequestType;
 import com.taka.tenpo.domain.recorder.model.TrackingRecorder;
-import com.taka.tenpo.domain.recorder.service.RecorderService;
+import com.taka.tenpo.domain.recorder.service.IRecorderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ import static com.taka.tenpo.controller.URLConstants.TRACKING_HISTORY;
 @AllArgsConstructor
 public class TrackingHistoryController {
 
-    private final RecorderService recorderService;
+    private final IRecorderService recorderService;
 
     @GetMapping(TRACKING_HISTORY)
     @ResponseBody

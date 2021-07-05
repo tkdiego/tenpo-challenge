@@ -1,6 +1,6 @@
 package com.taka.tenpo.domain.recorder.aspect;
 
-import com.taka.tenpo.domain.recorder.model.RequestType;
+import com.taka.tenpo.domain.recorder.enums.RequestType;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

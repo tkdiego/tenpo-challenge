@@ -1,12 +1,12 @@
 package com.taka.tenpo.controller;
 
 import com.taka.tenpo.domain.recorder.aspect.TrackingRequest;
-import com.taka.tenpo.domain.recorder.model.RequestType;
+import com.taka.tenpo.domain.recorder.enums.RequestType;
 import com.taka.tenpo.domain.security.model.LoginRequest;
 import com.taka.tenpo.domain.security.model.LogoutRequest;
 import com.taka.tenpo.domain.security.model.SignInRequest;
 import com.taka.tenpo.domain.security.model.TokenResponse;
-import com.taka.tenpo.domain.security.service.SessionService;
+import com.taka.tenpo.domain.security.service.ISessionService;
 import com.taka.tenpo.model.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.OK;
 @AllArgsConstructor
 public class SessionController {
 
-    private final SessionService sessionService;
+    private final ISessionService sessionService;
 
     @PostMapping(SIGN_IN)
     @TrackingRequest(requestType = RequestType.SIGN_IN)

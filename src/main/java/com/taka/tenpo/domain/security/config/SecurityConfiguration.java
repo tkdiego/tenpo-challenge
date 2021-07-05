@@ -3,6 +3,7 @@ package com.taka.tenpo.domain.security.config;
 
 import com.taka.tenpo.domain.security.config.entrypoint.CustomAuthenticationEntryPoint;
 import com.taka.tenpo.domain.security.filter.TokenInspectorFilter;
+import com.taka.tenpo.domain.security.service.ISessionSecurityService;
 import com.taka.tenpo.domain.security.service.JwtService;
 import com.taka.tenpo.domain.security.service.SessionService;
 import com.taka.tenpo.domain.security.service.UserCredentialService;
@@ -36,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JwtService jwtService;
 
-    private final SessionService sessionService;
+    private final ISessionSecurityService sessionService;
 
     private final UserCredentialService userCredentialService;
 

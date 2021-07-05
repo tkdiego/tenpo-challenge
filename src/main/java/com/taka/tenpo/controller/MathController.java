@@ -2,7 +2,7 @@ package com.taka.tenpo.controller;
 
 import com.taka.tenpo.domain.math.enums.OperationType;
 import com.taka.tenpo.domain.math.model.MathResponse;
-import com.taka.tenpo.domain.math.service.MathService;
+import com.taka.tenpo.domain.math.service.IMathService;
 import com.taka.tenpo.domain.recorder.aspect.TrackingRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import static com.taka.tenpo.controller.URLConstants.FIRST_VALUE;
 import static com.taka.tenpo.controller.URLConstants.MATH;
 import static com.taka.tenpo.controller.URLConstants.SECOND_VALUE;
 import static com.taka.tenpo.controller.URLConstants.SUM;
-import static com.taka.tenpo.domain.recorder.model.RequestType.MATH_SUM;
+import static com.taka.tenpo.domain.recorder.enums.RequestType.MATH_SUM;
 
 
 @RestController
@@ -25,7 +25,7 @@ import static com.taka.tenpo.domain.recorder.model.RequestType.MATH_SUM;
 @AllArgsConstructor
 public class MathController {
 
-    private final MathService mathService;
+    private final IMathService mathService;
 
     @GetMapping(SUM)
     @TrackingRequest(requestType = MATH_SUM)

@@ -1,4 +1,4 @@
-package com.taka.tenpo.domain.recorder.model;
+package com.taka.tenpo.domain.recorder.enums;
 
 public enum RequestType {
     MATH_SUM,
